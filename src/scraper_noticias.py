@@ -1,4 +1,5 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 import pandas as pd
 from requests.adapters import HTTPAdapter
@@ -106,7 +107,8 @@ def guardar_csv(noticias):
         return
 
     df = pd.DataFrame(noticias)
-    nombre_archivo = "cripto_noticias_SUCIO.csv"
+    carpeta_src = os.path.dirname(__file__)
+    nombre_archivo = os.path.join(carpeta_src, "..", "data", "cripto_noticias_SUCIO.csv")
     df.to_csv(nombre_archivo, index=False, encoding="utf-8-sig")
 
     print(f"\n[OK] CSV guardado: {nombre_archivo}")

@@ -5,7 +5,9 @@ def limpiar_datos():
     print("=== Iniciando Proceso de Limpieza y guardado en PARQUET ===")
     
     # Leemos el archivo csv
-    archivo_sucio = "cripto_precios_SUCIO.csv"
+    carpeta_src = os.path.dirname(__file__)
+    archivo_sucio = os.path.join(carpeta_src, "..", "data", "cripto_precios_SUCIO.csv")    
+    archivo_parquet = os.path.join(carpeta_src, "..", "data", "cripto_precios_OPTIMIZADO.parquet")
     if not os.path.exists(archivo_sucio):
         print(f"[ERROR] No se encontró el archivo {archivo_sucio}")
         return
@@ -36,9 +38,7 @@ def limpiar_datos():
 
     print("Limpieza y transformación completada.")
 
-    # Guardamos en PARQUET
-    archivo_parquet = "cripto_precios_OPTIMIZADO.parquet"
-    
+    # Guardamos en PARQUET    
     try:
         df.to_parquet(archivo_parquet, index=False)
         print(f"[OK] Archivo PARQUET guardado: {archivo_parquet}")

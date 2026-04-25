@@ -1,4 +1,5 @@
 import requests
+import os
 import pandas as pd
 import time
 from requests.adapters import HTTPAdapter
@@ -79,10 +80,11 @@ def guardar_csv(registros):
         return
 
     df = pd.DataFrame(registros)
-    nombre_archivo = "cripto_precios_SUCIO.csv"
+    carpeta_src = os.path.dirname(__file__)
+    nombre_archivo = os.path.join(carpeta_src, "..", "data", "cripto_precios_SUCIO.csv")
     df.to_csv(nombre_archivo, index=False, encoding="utf-8-sig")
 
-    print(f"\n[OK] CSV guardado: {nombre_archivo}")
+    print(f"\n[OK] CSV guardado en: {nombre_archivo}")
     print(f"[OK] Total de monedas: {len(registros)}")
     print("\nPrimeras 3 filas del CSV sucio:")
     print(df.head(3).to_string())

@@ -1,9 +1,11 @@
 import pandas as pd
+import os
 import random
 
 # --- CONFIG ---
-INPUT_FILE  = "cripto_precios_SUCIO.csv"
-OUTPUT_FILE = "cripto_precios_SUCIO.csv"
+carpeta_src = os.path.dirname(__file__)
+INPUT_FILE  = os.path.join(carpeta_src, "..", "data", "cripto_precios_SUCIO.csv")
+OUTPUT_FILE = os.path.join(carpeta_src, "..", "data", "cripto_precios_SUCIO.csv")
 COLUMNA     = "cap_mercado"
 SEED        = 42
 

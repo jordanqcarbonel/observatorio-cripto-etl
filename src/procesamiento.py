@@ -137,7 +137,7 @@ for i, col in enumerate(COLS_NORMALIZAR):
     df[nueva_col] = valores_norm[:, i]
     print(f"  ✔ '{nueva_col}' → rango [{df[nueva_col].min():.4f}, {df[nueva_col].max():.4f}]")
 
-# nivel_impacto también normalizado (ya es int 1-10, pero lo dejamos escalado igual)
+# nivel_impacto también normalizado 
 df["nivel_impacto_norm"] = (df["nivel_impacto"] - df["nivel_impacto"].min()) / \
                            (df["nivel_impacto"].max() - df["nivel_impacto"].min())
 print(f"  ✔ 'nivel_impacto_norm' → rango [{df['nivel_impacto_norm'].min():.4f}, {df['nivel_impacto_norm'].max():.4f}]")

@@ -23,8 +23,8 @@ from sklearn.preprocessing import MinMaxScaler
 # 0. RUTAS
 # ─────────────────────────────────────────────
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
-INPUT_CSV  = os.path.join(BASE_DIR, "data", "master_SUCIO.csv")
-OUTPUT_CSV = os.path.join(BASE_DIR, "data", "master_PROCESADO.csv")
+INPUT_CSV  = os.path.normpath(os.path.join(BASE_DIR, "..", "data", "master_SUCIO.csv"))
+OUTPUT_CSV = os.path.normpath(os.path.join(BASE_DIR, "..", "data", "master_PROCESADO.csv"))
 
 print("=" * 60)
 print("  OBSERVATORIO CRIPTO — PROCESAMIENTO ESTADÍSTICO")
@@ -76,7 +76,7 @@ for col in COLS_TEXTO:
 nulos_fecha = df["fecha_hora"].isnull().sum()
 if nulos_fecha > 0:
     df.dropna(subset=["fecha_hora"], inplace=True)
-    print(f"  ⚠ '{fecha_hora}' → {nulos_fecha} filas eliminadas (fecha inválida)")
+    print(f" ⚠ 'fecha_hora' → {nulos_fecha} filas eliminadas (fecha inválida)")
 
 nulos_despues = df.isnull().sum().sum()
 print(f"\n  Nulos antes: {nulos_antes}  →  Nulos después: {nulos_despues}")

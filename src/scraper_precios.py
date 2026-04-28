@@ -5,6 +5,7 @@ import time
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+# Comentario de prueba
 # ── CONEXIÓN ESTABLE ──────────────────────────────────────────
 def crear_sesion():
     sesion = requests.Session()

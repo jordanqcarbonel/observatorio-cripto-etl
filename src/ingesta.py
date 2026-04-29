@@ -53,29 +53,6 @@ def generar_sinteticos(n=20):
 # 3. UNIFICAR DATOS
 # ─────────────────────────────
 def unificar(df_precios, df_noticias, df_sintetico):
-    
-    # Adaptar precios a esquema master
-    df_precios["fecha_hora"] = datetime.now()
-    df_precios["tipo_evento"] = "precio"
-    df_precios["procedencia"] = "CoinGecko"
-    df_precios["id_transaccion"] = range(len(df_precios))
-
-    # Adaptar noticias
-    df_noticias["precio_usd"] = None
-    df_noticias["volumen_24h"] = None
-    df_noticias["market_cap"] = None
-    df_noticias["tipo_evento"] = "noticia"
-    df_noticias["procedencia"] = df_noticias["fuente"]
-    df_noticias["id_transaccion"] = range(len(df_noticias))
-
-    # Columnas finales
-    columnas = [
-        "id_transaccion", "fecha_hora", "activo",
-        "precio_usd", "volumen_24h", "market_cap",
-        "tipo_evento", "procedencia"
-    ]
-
-def unificar(df_precios, df_noticias, df_sintetico):
 
     # ── PRECIOS ──
     df_precios = df_precios.copy()
@@ -85,6 +62,7 @@ def unificar(df_precios, df_noticias, df_sintetico):
     df_precios["tipo_evento"] = "precio"
     df_precios["procedencia"] = "CoinGecko"
     df_precios["id_transaccion"] = range(len(df_precios))
+    df_precios["nivel_impacto"] = [random.randint(1, 10) for _ in range(len(df_precios))]
 
     # ── NOTICIAS ──
     df_noticias = df_noticias.copy()
@@ -97,6 +75,7 @@ def unificar(df_precios, df_noticias, df_sintetico):
     df_noticias["precio_usd"] = None
     df_noticias["volumen_24h"] = None
     df_noticias["market_cap"] = None
+    df_noticias["nivel_impacto"] = [random.randint(1, 10) for _ in range(len(df_noticias))]
 
     # 🔥 FIX CLAVE (tu error actual)
     if "fecha" in df_noticias.columns:
@@ -112,8 +91,13 @@ def unificar(df_precios, df_noticias, df_sintetico):
     columnas = [
         "id_transaccion", "fecha_hora", "activo",
         "precio_usd", "volumen_24h", "market_cap",
-        "tipo_evento", "procedencia"
+        "nivel_impacto", "tipo_evento", "procedencia"
     ]
+
+    # Generamos el nivel_impacto antes de concatenar
+    if "nivel_impacto" not in df_sintetico.columns:
+        df_sintetico["nivel_impacto"] = [random.randint(1, 10) for _ in range(len(df_sintetico))]
+    
 
     df_final = pd.concat([
         df_precios[columnas],

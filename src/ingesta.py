@@ -153,6 +153,11 @@ def main():
     assert df_final.shape[0] > 50, "Muy pocos datos generados"
     assert df_final["fecha_hora"].notnull().any(), "Todas las fechas son nulas"
 
+    # AÑADE ESTO PARA VISIBILIDAD:
+    print("\n✅ VALIDACIONES DE REGLAS DE NEGOCIO:")
+    print(f"   - Estructura: Columna 'precio_usd' y 'fecha_hora' verificadas.")
+    print(f"   - Volumen: {len(df_final)} registros cumplen el umbral mínimo (>50).")
+    print(f"   - Integridad: No se detectaron datasets vacíos.")
 
 
     # Guardar
@@ -166,10 +171,9 @@ def main():
 
     metricas_calidad(df_final)
 
-
-if __name__ == "__main__":
-    main()
-
 print("[INFO] Scraping completado")
 print("[INFO] Datos unificados correctamente")
 print("\n=== INGESTA COMPLETADA ===")
+
+if __name__ == "__main__":
+    main()
